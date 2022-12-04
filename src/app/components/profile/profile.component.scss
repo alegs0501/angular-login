@@ -1,0 +1,14 @@
+.profile-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 3em;
+
+  img {
+    background-color: #868686;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+  }
+}

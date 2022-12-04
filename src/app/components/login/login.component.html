@@ -1,0 +1,120 @@
+<div class="login-screen">
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login" [ngClass]="{'slide-up': !loginVisible}">
+
+        <h2 class="form-title mb-4" (click)="setLoginVisibility(true)"><span *ngIf="!loginVisible">or</span> Log in</h2>
+
+        <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin()" novalidate>
+          <div class="card">
+            <div class="card-body">
+
+              <div class="input-group ">
+                <span class="input-group-text"><i class="gg-mail"></i></span>
+                <div class="form-floating" [ngClass]="{'is-invalid': email.invalid && email.touched}">
+                  <input type="email" class="form-control" [ngClass]="{'is-invalid': email.invalid && email.touched}" id="email" placeholder="Email" formControlName="email">
+                  <label for="email">Email</label>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="email.invalid && email.touched">{{emailTextError}}</div>
+                </div>
+              </div>
+
+              <div class="input-group ">
+                <span class="input-group-text"><i class="gg-password"></i></span>
+                <div class="form-floating" [ngClass]="{'is-invalid': password.invalid && password.touched}">
+                  <input type="password" class="form-control" [ngClass]="{'is-invalid': password.invalid && password.touched}" id="password" placeholder="Password" formControlName="password">
+                  <label for="password">Password</label>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="password.invalid && password.touched">Please type your password</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <ng-container *ngTemplateOutlet="loginInProgress ?  loginTemplate: noLoginTemplate"></ng-container>
+
+          <ng-template #noLoginTemplate>
+            <button type="submit" class="btn">Log in</button>
+          </ng-template>
+
+          <ng-template #loginTemplate>
+            <button type="button" class="btn disabled">
+              <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </button>
+          </ng-template>
+
+        </form>
+
+        <p class="text-white mt-1 mb-1">-or-</p>
+
+        <asl-google-signin-button></asl-google-signin-button>
+
+      </div>
+
+      <div class="signup" [ngClass]="{'slide-up': loginVisible}">
+        <div class="center">
+          <h2 class="form-title mb-4" (click)="setLoginVisibility(false)"><span *ngIf="loginVisible">or</span> Sign up</h2>
+
+          <form [formGroup]="formSignup" (ngSubmit)="onSubmitSignup()" novalidate>
+            <div class="card">
+              <div class="card-body">
+
+                <div class="input-group ">
+                  <span class="input-group-text"><i class="gg-mail"></i></span>
+                  <div class="form-floating" [ngClass]="{'is-invalid': emailSU.invalid && emailSU.touched}">
+                    <input type="email" class="form-control" [ngClass]="{'is-invalid': emailSU.invalid && emailSU.touched}" id="emailSU" placeholder="Email" formControlName="emailSU">
+                    <label for="emailSU">Email</label>
+                  </div>
+                  <div class="invalid-feedback">
+                    <div *ngIf="emailSU.invalid && emailSU.touched">{{emailSUTextError}}</div>
+                  </div>
+                </div>
+
+                <div class="input-group ">
+                  <span class="input-group-text"><i class="gg-password"></i></span>
+                  <div class="form-floating" [ngClass]="{'is-invalid': passwordSU.invalid && passwordSU.touched}">
+                    <input type="password" class="form-control" [ngClass]="{'is-invalid': passwordSU.invalid && passwordSU.touched}" id="passwordSU" placeholder="Password" formControlName="passwordSU">
+                    <label for="passwordSU">Password</label>
+                  </div>
+                  <div class="invalid-feedback">
+                    <div *ngIf="passwordSU.invalid && passwordSU.touched">{{passwordSUTextError}}</div>
+                  </div>
+                </div>
+
+                <div class="input-group ">
+                  <span class="input-group-text"><i class="gg-password"></i></span>
+                  <div class="form-floating" [ngClass]="{'is-invalid': (passwordRepeatSU.invalid || passwordMatchError) && passwordRepeatSU.touched}">
+                    <input type="password" class="form-control" [ngClass]="{'is-invalid': (passwordRepeatSU.invalid || passwordMatchError) && passwordRepeatSU.touched}" id="passwordRepeatSU" placeholder="Repeat your password" formControlName="passwordRepeatSU">
+                    <label for="passwordRepeatSU">Repeat password</label>
+                  </div>
+                  <div class="invalid-feedback">
+                    <div *ngIf="passwordRepeatSU.invalid && passwordRepeatSU.touched">Please type your password</div>
+                    <div *ngIf="passwordMatchError && passwordRepeatSU.touched">Passwords doesn't match</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+           <ng-container *ngTemplateOutlet="registerInProgress ?  loginTemplate: noRegisterTemplate"></ng-container>
+
+           <ng-template #noRegisterTemplate>
+             <button type="submit" class="btn">Sign up</button>
+           </ng-template>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-modal-error></app-modal-error>
+<app-modal-success></app-modal-success>

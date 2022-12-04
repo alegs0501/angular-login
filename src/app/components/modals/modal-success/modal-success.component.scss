@@ -1,0 +1,25 @@
+.icon-message{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #198754;
+
+  h4{
+    margin-bottom: 0 !important;
+  }
+}
+
+.modal-footer{
+  justify-content: center !important;
+  border-top: none !important;
+}
+
+.modal-header {
+  display: flex !important;
+  justify-content: center !important;
+  border-bottom: none !important;
+}
+

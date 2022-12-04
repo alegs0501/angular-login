@@ -1,0 +1,76 @@
+<div class="modal fade" id="modalUserEdit" tabindex="-1" aria-labelledby="modalUserEditLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalUserEditLabel">Edit user</h1>
+      </div>
+      <div class="modal-body">
+
+        <form *ngIf="!loadingUser" [formGroup]="formEditUser" (ngSubmit)="onSubmit()" novalidate>
+          <div class="card">
+            <div class="card-body">
+
+              <div class="input-group ">
+                <span class="input-group-text"><i class="gg-mail"></i></span>
+                <div class="form-floating" [ngClass]="{'is-invalid': email.invalid && email.touched}">
+                  <input type="email" class="form-control" [ngClass]="{'is-invalid': email.invalid && email.touched}" id="email" placeholder="Email" formControlName="email">
+                  <label for="email">Email</label>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="email.invalid && email.touched">{{emailTextError}}</div>
+                </div>
+              </div>
+
+              <div class="input-group ">
+                <span class="input-group-text"><i class="gg-user"></i></span>
+                <div class="form-floating" [ngClass]="{'is-invalid': name.invalid && name.touched}">
+                  <input type="text" class="form-control" [ngClass]="{'is-invalid': name.invalid && name.touched}" id="name" placeholder="Name" formControlName="name">
+                  <label for="name">Name</label>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="name.invalid && name.touched">Please type the name</div>
+                </div>
+              </div>
+
+              <div class="input-group ">
+                <span class="input-group-text"><i class="gg-clipboard"></i></span>
+                <div class="form-floating" [ngClass]="{'is-invalid': job.invalid && job.touched}">
+                  <input type="text" class="form-control" [ngClass]="{'is-invalid': job.invalid && job.touched}" id="job" placeholder="Job" formControlName="job">
+                  <label for="name">Job</label>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="job.invalid && job.touched">Please type the job</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+
+        <div *ngIf="loadingUser" class="d-flex justify-content-center">
+          <div class="spinner-border text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <ng-container *ngTemplateOutlet="(updatingUser || loadingUser) ?  updatingTemplate: noUpdatingTemplate"></ng-container>
+
+          <ng-template #noUpdatingTemplate>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Close</button>
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()">Update</button>
+          </ng-template>
+
+          <ng-template #updatingTemplate>
+            <button type="button" class="btn disabled">
+              <div class="spinner-border text-dark" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </button>
+          </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

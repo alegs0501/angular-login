@@ -1,0 +1,64 @@
+<div class="container mt-4">
+
+  <app-profile></app-profile>
+
+  <h2>Users</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Job</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="!loadingUsers">
+
+      <tr *ngFor="let user of usersList; let i = index">
+        <th scope="row">{{(i + 1) + ((currentPage - 1) * usersPerPage)}}</th>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.job}}</td>
+        <td>
+          <div class="w-100 d-flex justify-content-center gap-1">
+            <button type="button" class="btn btn-outline-default" (click)="openEditModal(user.id)"><i class="gg-pen"></i></button>
+          </div>
+        </td>
+      </tr>
+
+      <tr *ngIf="usersList.length == 0">
+        <td colspan="5"><h4 class="text-danger text-center">User list is empty</h4></td>
+      </tr>
+
+      <tr *ngIf="currentPage == maxPages">
+        <td colspan="5"><button type="button" class="btn btn-primary btn-create-user" (click)="openCreateModal()"><i class="gg-math-plus"></i>New user</button></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div *ngIf="loadingUsers" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <nav *ngIf="usersList.length > 0">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="{'disabled': currentPage == 1}">
+        <a class="page-link" (click)="getPage(currentPage - 1)">Previous</a>
+      </li>
+      <li class="page-item" *ngFor="let key of maxPages | denoNumber" [ngClass]="{'active': currentPage == key}"><a class="page-link" (click)="getPage(key)">{{key}}</a></li>
+      <li class="page-item" [ngClass]="{'disabled': currentPage == maxPages}">
+        <a class="page-link" (click)="getPage(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<app-modal-error></app-modal-error>
+<app-modal-success></app-modal-success>
+<app-user-create-modal></app-user-create-modal>
+<app-user-edit-modal></app-user-edit-modal>
