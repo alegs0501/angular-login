@@ -66,9 +66,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   openEditModal(id: number): void{
     this.modalUserEdit?.showModal(id)
-    setTimeout(() => {
-      this.userModel.getUser(id)
-    }, 1000)
+    this.userModel.getUser(id)
   }
 
   responseUserCreate(): void{
@@ -96,8 +94,10 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   responseUser() {
     if (this.observerUser.status != 200){
-      this.modalUserEdit?.hideModal()
-      this.showError(this.observerUser.message)
+      setTimeout(() => {
+        this.modalUserEdit?.hideModal()
+        this.showError(this.observerUser.message)
+      }, 1000)
     }else{
       this.modalUserEdit!.loadingUser = false
       this.modalUserEdit!.user = this.observerUser.data as UserOBJ

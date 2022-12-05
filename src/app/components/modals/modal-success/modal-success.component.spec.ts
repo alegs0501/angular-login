@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser'
 import { DebugElement } from '@angular/core'
 
 import { ModalSuccessComponent } from './modal-success.component'
+window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js')
 
 describe('ModalSuccessComponent', () => {
   let component: ModalSuccessComponent

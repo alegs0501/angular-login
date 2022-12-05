@@ -1,3 +1,4 @@
+import { Router } from '@angular/router'
 import { LoginService } from './../services/access/login.service'
 import { Injectable } from '@angular/core'
 import { ProfileOBJ } from '../interfaces/profileOBJ'
@@ -8,6 +9,7 @@ export class ProfileModel {
 
   constructor(
     private loginService: LoginService,
+    private router: Router,
     private signupService: SignupService
     ){}
 
@@ -33,12 +35,20 @@ export class ProfileModel {
     this.signupService.signupFromGoogle(profile)
   }
 
+  getProfile(): void{
+    this.loginService.getUserInfo()
+  }
+
   login(email: string, password: string): void{
     this.loginService.login(email, password)
   }
 
-  getProfile(): void{
-    this.loginService.getUserInfo()
+  logout(): void{
+    this.loginService.logout()
+    setTimeout(() => {
+      this.router.navigate(['login'])
+    }, 200)
   }
+
 
 }

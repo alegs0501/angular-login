@@ -49,6 +49,10 @@ export class LoginService {
     }
   }
 
+  logout(): void{
+    this.accessStorage.setKey('')
+  }
+
   async getUserInfo(): Promise<any>{
     const path = `${environment.expressHost}${this.PROFILE_URI}`
     const header = new Headers()

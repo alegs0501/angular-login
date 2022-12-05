@@ -1,4 +1,4 @@
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from './components/profile/profile.component'
 import { UserCreateModalComponent } from './components/modals/users/user-create-modal/user-create-modal.component'
 import { UserEditModalComponent } from './components/modals/users/user-edit-modal/user-edit-modal.component'
 import { DenoNumberPipe } from './pipes/deno-number.pipe'

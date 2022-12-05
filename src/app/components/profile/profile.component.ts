@@ -36,11 +36,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   receiveUser(): void{
+    console.log("🚀 ~ file: profile.component.ts:40 ~ ProfileComponent ~ receiveUser ~ this.observerProfile", this.observerProfile)
     if (this.observerProfile.status == 200){
       const user = this.observerProfile.data as ProfileOBJ
       this.name = user.name
       this.email = user.email
       this.image = user.photoUrl
+    }else{
+      this.profileModel.logout()
     }
   }
 
